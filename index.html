@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osman Basar | Frontend Developer</title>
+    <title>Osman Basar | Frontend Developer & UI Engineer</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,7 +34,7 @@
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Manrope', sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -44,44 +44,42 @@
             animation: none;
             mix-blend-mode: normal;
         }
-        ::view-transition-old(root) {
-            z-index: 1;
-        }
-        ::view-transition-new(root) {
-            z-index: 2;
-        }
+        ::view-transition-old(root) { z-index: 1; }
+        ::view-transition-new(root) { z-index: 2; }
 
         /* --- Glassmorphism Navbar --- */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(250, 250, 250, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
         .dark .glass-nav {
-            background: rgba(11, 15, 25, 0.6);
+            background: rgba(9, 9, 11, 0.7);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* --- Glass Cards --- */
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
         }
         .dark .glass-card {
-            background: rgba(17, 24, 39, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            background: rgba(24, 24, 27, 0.4); /* zinc-900 */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
         .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            border-color: rgba(0, 0, 0, 0.1);
         }
         .dark .glass-card:hover {
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         /* --- Graph Theme Background --- */
@@ -100,30 +98,30 @@
         .blend-orb {
             position: fixed;
             border-radius: 50%;
-            filter: blur(90px);
+            filter: blur(100px);
             z-index: -2;
             pointer-events: none;
-            animation: float 12s infinite alternate ease-in-out;
+            animation: float 15s infinite alternate ease-in-out;
         }
         .orb-1 {
-            width: 450px; height: 450px;
-            top: -10%; left: -10%;
-            background: rgba(0, 0, 0, 0.08);
+            width: 50vw; height: 50vw;
+            top: -20%; left: -10%;
+            background: rgba(0, 0, 0, 0.05);
             mix-blend-mode: multiply;
         }
         .orb-2 {
-            width: 400px; height: 400px;
+            width: 40vw; height: 40vw;
             bottom: -10%; right: -10%;
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.03);
             mix-blend-mode: multiply;
-            animation-delay: -6s;
+            animation-delay: -7s;
         }
-        .dark .orb-1 { background: rgba(255, 255, 255, 0.06); mix-blend-mode: screen; }
-        .dark .orb-2 { background: rgba(255, 255, 255, 0.04); mix-blend-mode: screen; }
+        .dark .orb-1 { background: rgba(255, 255, 255, 0.03); mix-blend-mode: screen; }
+        .dark .orb-2 { background: rgba(255, 255, 255, 0.02); mix-blend-mode: screen; }
 
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 60px) scale(1.1); }
+            100% { transform: translate(3vw, 5vh) scale(1.05); }
         }
 
         /* --- Canvas Layers --- */
@@ -138,15 +136,23 @@
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #3f3f46; }
+        ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
     </style>
 </head>
-<body class="bg-lightBg dark:bg-darkBg text-zinc-800 dark:text-zinc-200 overflow-x-hidden selection:bg-zinc-800 selection:text-white dark:selection:bg-zinc-200 dark:selection:text-zinc-900">
+<body class="bg-lightBg dark:bg-darkBg text-zinc-800 dark:text-zinc-200 overflow-x-hidden selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900">
 
     <!-- Background Elements -->
     <div class="graph-bg"></div>
@@ -156,124 +162,321 @@
 
     <!-- Navbar -->
     <nav class="glass-nav fixed w-full z-50 top-0 transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-display font-bold tracking-tight hover:opacity-80 transition-opacity">O<span class="text-zinc-400 dark:text-zinc-500">.</span>Basar</a>
-            <div class="flex items-center space-x-6">
-                <a href="#works" class="text-sm font-medium hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">Works</a>
-                <a href="#contact" class="text-sm font-medium hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">Contact</a>
-                <button id="theme-toggle" class="p-2 rounded-full bg-zinc-200/50 hover:bg-zinc-300/80 dark:bg-zinc-800/50 dark:hover:bg-zinc-700/80 transition-colors flex items-center justify-center group">
-                    <!-- Sun Icon -->
-                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-zinc-800 group-hover:rotate-45 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-display font-bold tracking-tight hover:opacity-80 transition-opacity">
+                O<span class="text-zinc-400 dark:text-zinc-500">.</span>Basar
+            </a>
+            
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">About</a>
+                <a href="#process" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Process</a>
+                <a href="#case-studies" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Case Studies</a>
+                <a href="#archive" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Archive</a>
+                <a href="#contact" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Contact</a>
+                
+                <div class="w-px h-5 bg-zinc-300 dark:bg-zinc-700"></div>
+
+                <button id="theme-toggle" class="p-2 rounded-full bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors flex items-center justify-center group" aria-label="Toggle Dark Mode">
+                    <!-- Sun Icon (White in Dark Mode) -->
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-white group-hover:rotate-45 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
-                    <!-- Moon Icon -->
-                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-zinc-200 group-hover:-rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                    <!-- Moon Icon (Dark Zinc in Light Mode) -->
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-zinc-900 group-hover:-rotate-12 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                     </svg>
                 </button>
+            </div>
+
+            <!-- Mobile Menu Button (Visual Only for snippet) -->
+            <div class="md:hidden flex items-center space-x-4">
+                <button id="theme-toggle-mobile" class="p-2 rounded-full bg-zinc-200 dark:bg-zinc-800 transition-colors">
+                    <svg class="w-5 h-5 text-zinc-900 dark:text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </button>
+                <svg class="w-6 h-6 text-zinc-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-6 pt-32 pb-20 relative z-10">
+    <main class="max-w-7xl mx-auto px-6 pt-32 pb-20 relative z-10">
 
         <!-- Hero Section -->
-        <section id="home" class="min-h-[75vh] flex flex-col justify-center items-start fade-in">
-            <p class="text-zinc-500 dark:text-zinc-400 font-mono tracking-wide text-sm mb-4 uppercase">Hi, my name is</p>
-            <h1 class="text-5xl md:text-7xl font-display font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-500 dark:from-white dark:via-zinc-300 dark:to-zinc-500">
-                Osman Basar.
+        <section id="home" class="min-h-[85vh] flex flex-col justify-center items-start fade-in">
+            <div class="inline-flex items-center space-x-2 bg-zinc-200/50 dark:bg-zinc-800/50 px-3 py-1.5 rounded-full mb-6 border border-zinc-300 dark:border-zinc-700">
+                <span class="relative flex h-2.5 w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                <span class="text-xs font-mono text-zinc-700 dark:text-zinc-300 uppercase tracking-wider font-semibold">Available for new opportunities</span>
+            </div>
+
+            <h1 class="text-5xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tighter mb-6 text-zinc-900 dark:text-white leading-[1.1]">
+                Engineering robust <br class="hidden md:block"/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-400 dark:from-zinc-400 dark:to-zinc-600">digital products.</span>
             </h1>
-            <h2 class="text-4xl md:text-6xl font-display font-bold text-zinc-500 dark:text-zinc-400 mb-6">
-                I build things for the web.
-            </h2>
-            <p class="max-w-2xl text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10">
-                I'm a frontend developer specializing in modern, minimalist design and scalable digital experiences. 
-                Proficient in building performant, glassmorphism-inspired interfaces using cutting-edge web technologies.
+            
+            <p class="max-w-2xl text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 font-medium">
+                I'm Osman Basar, a Frontend Engineer specializing in scalable web applications, enterprise dashboards, and pixel-perfect UI. With over <strong class="text-zinc-900 dark:text-white">15+ applications designed and developed</strong>, I bridge the gap between complex engineering and elegant user experiences.
             </p>
-            <div class="flex items-center space-x-4">
-                <a href="#works" class="px-8 py-3 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold hover:scale-105 transition-transform duration-200 shadow-lg shadow-zinc-900/20 dark:shadow-white/10">
-                    View My Work
+            
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <a href="#case-studies" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors duration-200 text-center">
+                    Explore Case Studies
                 </a>
-                <a href="https://github.com" target="_blank" class="p-3 rounded-full border border-zinc-300 dark:border-zinc-700 hover:border-zinc-900 dark:hover:border-white transition-colors duration-200 text-zinc-900 dark:text-white">
-                    <!-- GitHub Logo -->
-                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-zinc-300 dark:border-zinc-700 hover:border-zinc-900 dark:hover:border-white transition-colors duration-200 text-zinc-900 dark:text-white font-semibold text-center">
+                    Get in Touch
                 </a>
             </div>
         </section>
 
-        <!-- Works Section -->
-        <section id="works" class="py-24 fade-in">
-            <h3 class="text-3xl font-display font-bold mb-12 flex items-center">
-                <span class="text-zinc-400 dark:text-zinc-500 font-mono text-xl mr-3">01.</span> Selected Works
-                <div class="h-[1px] bg-zinc-300 dark:bg-zinc-700 flex-grow ml-6"></div>
-            </h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Project 1: Hosted Site -->
-                <div class="glass-card rounded-3xl p-8 flex flex-col group relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-zinc-400 to-zinc-600 dark:from-zinc-600 dark:to-zinc-400 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex justify-between items-center mb-8">
-                        <div class="p-3 rounded-2xl bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                            <!-- Website Logo (Globe) -->
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-                        </div>
-                        <a href="#" target="_blank" title="View Live Site" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
-                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                        </a>
-                    </div>
-                    <h4 class="text-2xl font-display font-bold mb-4 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">Ranihati GPS Portal</h4>
-                    <p class="text-zinc-600 dark:text-zinc-400 text-base mb-8 flex-grow leading-relaxed">
-                        The official web portal for Ranihati Government Primary School. Engineered for optimal performance with SEO routing, dynamic content delivery, and an immersive user interface.
+        <!-- About & Goals Section -->
+        <section id="about" class="py-24 fade-in scroll-mt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <div class="lg:col-span-5">
+                    <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">01. About Me</h3>
+                    <h2 class="text-4xl font-display font-bold mb-6 text-zinc-900 dark:text-white">Driven by logic. Designed for humans.</h2>
+                </div>
+                <div class="lg:col-span-7 space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    <p>
+                        My journey in tech didn't start with just writing code; it started with solving problems. Today, my primary focus is building <strong class="text-zinc-900 dark:text-white">complex, data-heavy web applications</strong>—ranging from Enterprise SaaS dashboards to scalable EdTech platforms.
                     </p>
-                    <div class="flex flex-wrap items-center gap-4 text-zinc-500 dark:text-zinc-400">
-                        <!-- Tech Logos -->
-                        <div class="flex items-center gap-1" title="HTML5">
-                            <svg class="w-5 h-5 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.212-2.142H6.53l.34 4.735 5.063 1.411 5.145-1.422.613-7.228H8.531z"/></svg>
-                            <span class="text-xs font-mono">HTML5</span>
+                    <p>
+                        I believe that great frontend development isn't just about making things look pretty. It's about architecture, state management, accessibility, and performance. I tailor my workflow to build products that are not only visually engaging but maintainable for engineering teams over years.
+                    </p>
+                    <div class="pt-6 grid grid-cols-2 md:grid-cols-3 gap-6 font-mono text-sm">
+                        <div>
+                            <p class="text-zinc-900 dark:text-white font-bold mb-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">Core Stack</p>
+                            <ul class="space-y-2">
+                                <li>JavaScript (ES6+)</li>
+                                <li>React / Next.js</li>
+                                <li>TypeScript</li>
+                            </ul>
                         </div>
-                        <div class="flex items-center gap-1" title="CSS3">
-                            <svg class="w-5 h-5 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.41H5.41l.23 2.622h10.059l-.232 2.718H8.532l-.253 2.836h6.774l-.325 3.425-2.91.805-2.956-.81-.212-2.142H6.53l.34 4.736 5.063 1.411 5.145-1.422.613-7.228-1.503-6.95z"/></svg>
-                            <span class="text-xs font-mono">CSS3</span>
+                        <div>
+                            <p class="text-zinc-900 dark:text-white font-bold mb-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">Styling & UI</p>
+                            <ul class="space-y-2">
+                                <li>Tailwind CSS</li>
+                                <li>Framer Motion</li>
+                                <li>Figma & Prototyping</li>
+                            </ul>
                         </div>
-                        <div class="flex items-center gap-1" title="Vercel">
-                            <svg class="w-5 h-5 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="currentColor"><path d="M24 22.525H0l12-21.05 12 21.05z"/></svg>
-                            <span class="text-xs font-mono">Vercel</span>
+                        <div>
+                            <p class="text-zinc-900 dark:text-white font-bold mb-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">Architecture</p>
+                            <ul class="space-y-2">
+                                <li>RESTful APIs / GraphQL</li>
+                                <li>State Management</li>
+                                <li>Web Accessibility (a11y)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section id="process" class="py-24 fade-in scroll-mt-20">
+            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase text-center">02. Methodology</h3>
+            <h2 class="text-4xl font-display font-bold mb-16 text-center text-zinc-900 dark:text-white">How I build products.</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">01</div>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Research & Discovery</h4>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Understanding the business logic, user pain points, and technical constraints before writing a single line of code.</p>
+                </div>
+                <!-- Step 2 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">02</div>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Wireframes & Prototyping</h4>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Drafting low-fidelity sketches mapped to user flows, evolving into high-fidelity, interactive Figma prototypes.</p>
+                </div>
+                <!-- Step 3 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">03</div>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Development & Architecture</h4>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Building modular, reusable component libraries. Implementing clean state management and integrating APIs.</p>
+                </div>
+                <!-- Step 4 -->
+                <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">04</div>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Testing & Optimization</h4>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Rigorous lighthouse audits, cross-browser testing, and performance tuning to ensure lightning-fast load times.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Deep Dive Case Studies -->
+        <section id="case-studies" class="py-24 fade-in scroll-mt-20 border-t border-zinc-200 dark:border-zinc-800">
+            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">03. Featured Work</h3>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-16 text-zinc-900 dark:text-white">Case Studies</h2>
+
+            <div class="space-y-32">
+                
+                <!-- Case Study 1 -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-5 order-2 lg:order-1 glass-card p-8 md:p-12 rounded-3xl h-full flex flex-col justify-center bg-zinc-100/50 dark:bg-zinc-900/50">
+                        <!-- Placeholder for UI Mockup graphic/visual -->
+                        <div class="w-full h-64 bg-zinc-200 dark:bg-zinc-800 rounded-xl border border-zinc-300 dark:border-zinc-700 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMTI4LDEyOCwxMjgsMC4yKSIvPjwvc3ZnPg==')] opacity-50"></div>
+                            <svg class="w-16 h-16 text-zinc-400 dark:text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-7 order-1 lg:order-2">
+                        <div class="mb-6 flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">FinTech</span>
+                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">Dashboard</span>
+                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">React</span>
+                        </div>
+                        <h3 class="text-3xl font-display font-bold mb-6 text-zinc-900 dark:text-white">Enterprise Financial Analytics Platform</h3>
+                        
+                        <div class="space-y-6 text-zinc-600 dark:text-zinc-400 text-base leading-relaxed">
+                            <div>
+                                <strong class="text-zinc-900 dark:text-white block mb-1">The Problem:</strong>
+                                Financial analysts were overwhelmed by dense, unreadable spreadsheets. They needed a real-time, highly visual dashboard to track market volatility without UI lag.
+                            </div>
+                            <div>
+                                <strong class="text-zinc-900 dark:text-white block mb-1">My Process & Role:</strong>
+                                As the Lead Frontend Developer, I mapped out complex data flows. I designed a customized component library in Figma, ensuring charts were accessible. Development was executed using React, integrating heavy WebSocket streams.
+                            </div>
+                            <div>
+                                <strong class="text-zinc-900 dark:text-white block mb-1">The Challenge:</strong>
+                                Rendering thousands of data points per second caused browser freezing. I overcame this by implementing Canvas-based charting (Chart.js) and virtualized lists to keep the DOM light.
+                            </div>
+                            <div class="p-4 bg-zinc-100 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                                <strong class="text-zinc-900 dark:text-white block mb-2">Quantifiable Impact:</strong>
+                                <ul class="list-disc pl-5 space-y-1 text-sm font-medium">
+                                    <li><span class="text-green-600 dark:text-green-400">Reduced data-load time by 1.4s</span> via efficient state management.</li>
+                                    <li><span class="text-green-600 dark:text-green-400">Increased daily active user (DAU) retention by 25%</span> due to improved UX.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <a href="#" class="inline-flex items-center gap-2 text-zinc-900 dark:text-white font-bold hover:underline underline-offset-4 decoration-2">
+                                View Full Process 
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Project 2: GitHub Repo -->
-                <div class="glass-card rounded-3xl p-8 flex flex-col group relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-zinc-600 to-zinc-400 dark:from-zinc-400 dark:to-zinc-600 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-                    <div class="flex justify-between items-center mb-8">
-                        <div class="p-3 rounded-2xl bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                            <!-- GitHub Folder Logo -->
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                <!-- Case Study 2 -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 order-1 lg:order-1">
+                        <div class="mb-6 flex flex-wrap gap-2">
+                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">EdTech</span>
+                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">SEO</span>
+                            <span class="px-3 py-1 text-xs font-mono rounded-full bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">Next.js</span>
                         </div>
-                        <div class="flex gap-4">
-                            <a href="#" target="_blank" title="View Source on GitHub" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
-                                <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        <h3 class="text-3xl font-display font-bold mb-6 text-zinc-900 dark:text-white">Ranihati GPS Official Portal</h3>
+                        
+                        <div class="space-y-6 text-zinc-600 dark:text-zinc-400 text-base leading-relaxed">
+                            <div>
+                                <strong class="text-zinc-900 dark:text-white block mb-1">The Problem:</strong>
+                                A government primary school lacked a centralized digital hub for parents and teachers. Crucial announcements were getting lost, and the existing system was completely inaccessible on mobile devices.
+                            </div>
+                            <div>
+                                <strong class="text-zinc-900 dark:text-white block mb-1">My Process & Role:</strong>
+                                I acted as the sole product designer and full-stack developer. I conducted user interviews with parents to understand their technical literacy, created high-fidelity responsive wireframes, and built the site using Next.js for superior SEO and routing.
+                            </div>
+                            <div>
+                                <strong class="text-zinc-900 dark:text-white block mb-1">The Challenge:</strong>
+                                Designing for strict Web Accessibility (A11y) standards while maintaining a modern, aesthetic "glassmorphism" UI. Contrast ratios had to be rigorously tested.
+                            </div>
+                            <div class="p-4 bg-zinc-100 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                                <strong class="text-zinc-900 dark:text-white block mb-2">Quantifiable Impact:</strong>
+                                <ul class="list-disc pl-5 space-y-1 text-sm font-medium">
+                                    <li><span class="text-green-600 dark:text-green-400">Achieved 100% Lighthouse Scores</span> in Performance, Accessibility, and SEO.</li>
+                                    <li><span class="text-green-600 dark:text-green-400">Adopted by 500+ parents</span> within the first month of launch.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex gap-6">
+                            <a href="#" class="inline-flex items-center gap-2 text-zinc-900 dark:text-white font-bold hover:underline underline-offset-4 decoration-2">
+                                Read Case Study
                             </a>
-                            <a href="#" target="_blank" title="View Live Demo" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            <a href="#" class="inline-flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-medium transition-colors">
+                                Live Site <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                             </a>
                         </div>
                     </div>
-                    <h4 class="text-2xl font-display font-bold mb-4 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">Aesthetic Dev Portfolio</h4>
-                    <p class="text-zinc-600 dark:text-zinc-400 text-base mb-8 flex-grow leading-relaxed">
-                        An open-source, highly customizable portfolio template. Implements glassmorphism aesthetics, dynamic view transitions, and a refined minimal design.
+                    <div class="lg:col-span-5 order-2 lg:order-2 glass-card p-8 md:p-12 rounded-3xl h-full flex flex-col justify-center bg-zinc-100/50 dark:bg-zinc-900/50">
+                        <div class="w-full h-64 bg-zinc-200 dark:bg-zinc-800 rounded-xl border border-zinc-300 dark:border-zinc-700 flex items-center justify-center relative overflow-hidden">
+                            <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMTI4LDEyOCwxMjgsMC4yKSIvPjwvc3ZnPg==')] opacity-50"></div>
+                            <svg class="w-16 h-16 text-zinc-400 dark:text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Archive / Hidden Work Section -->
+        <section id="archive" class="py-24 fade-in scroll-mt-20">
+            <div class="text-center mb-16">
+                <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">04. The Archive</h3>
+                <h2 class="text-3xl md:text-4xl font-display font-bold text-zinc-900 dark:text-white mb-4">Other Noteworthy Projects</h2>
+                <p class="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">A curated list of personal experiments, open-source contributions, and side projects that highlight my versatility across different tech stacks.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Archive Item 1 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex justify-between items-center mb-6">
+                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        <a href="#" class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">Web3 Crypto Tracker</h4>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
+                        A decentralized app tracking live cryptocurrency prices using WebSocket APIs. Built to master state management in high-frequency update environments.
                     </p>
-                    <div class="flex flex-wrap items-center gap-4 text-zinc-500 dark:text-zinc-400">
-                        <div class="flex items-center gap-1" title="Tailwind CSS">
-                            <svg class="w-5 h-5 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z"/></svg>
-                            <span class="text-xs font-mono">Tailwind</span>
-                        </div>
-                        <div class="flex items-center gap-1" title="JavaScript">
-                            <svg class="w-5 h-5 text-zinc-700 dark:text-zinc-300" viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M3 3h18v18H3V3zm14.828 12.836c.062-.516.347-1.155 1.054-1.666l-1.42-1.406c-.846.804-1.353 1.848-1.385 2.977-.034 1.25.43 2.505 1.576 3.09.77.387 1.63.468 2.454.26.793-.198 1.488-.705 1.954-1.39l-1.31-1.378c-.287.33-.675.564-1.1.668-.42.102-.87.05-1.258-.152-.46-.24-.693-.728-.697-1.24-.01-.676.43-1.134.908-1.493l-.776-.77zM7.28 14.126c-.328-.4-.73-.723-1.173-.95L5 14.59c.646.335 1.22.82 1.674 1.395l1.096-1.077c-.156-.27-.323-.53-.5-.78zM10.45 6H8v12h2.45V6z"/></svg>
-                            <span class="text-xs font-mono">JavaScript</span>
-                        </div>
+                    <div class="flex flex-wrap gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-500">
+                        <span>Vue.js</span>
+                        <span>Ethers.js</span>
+                        <span>Tailwind</span>
+                    </div>
+                </div>
+
+                <!-- Archive Item 2 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex justify-between items-center mb-6">
+                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        <a href="#" class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">AI Prompt Architect</h4>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
+                        A full-stack application that helps writers generate, save, and refine prompts for LLMs using an intuitive drag-and-drop interface.
+                    </p>
+                    <div class="flex flex-wrap gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-500">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Archive Item 3 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex justify-between items-center mb-6">
+                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        <a href="#" class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">Minimalist CSS Framework</h4>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
+                        A lightweight (under 5kb) CSS utility framework created from scratch to understand the underlying mechanics of systems like Tailwind.
+                    </p>
+                    <div class="flex flex-wrap gap-3 text-xs font-mono text-zinc-500 dark:text-zinc-500">
+                        <span>SASS</span>
+                        <span>CSS3</span>
+                        <span>Gulp</span>
                     </div>
                 </div>
 
@@ -281,16 +484,23 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-24 mb-10 fade-in text-center max-w-2xl mx-auto">
-            <h3 class="text-sm font-mono text-zinc-500 mb-4 tracking-widest">02. WHAT'S NEXT?</h3>
-            <h2 class="text-5xl font-display font-extrabold mb-8">Get In Touch</h2>
+        <section id="contact" class="py-32 fade-in text-center max-w-2xl mx-auto border-t border-zinc-200 dark:border-zinc-800">
+            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">05. What's Next?</h3>
+            <h2 class="text-5xl font-display font-extrabold mb-8 text-zinc-900 dark:text-white">Let's build together.</h2>
             <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-12 leading-relaxed">
-                Whether you have a question about web development, want to collaborate on a frontend project, or just want to say hi, my inbox is always open. Located in Chapainawabganj (চাঁপাইনবাবগঞ্জ), Bangladesh.
+                Currently open for new opportunities. Whether you have a complex enterprise project, need a scalable frontend architecture, or just want to discuss web engineering, my inbox is always open. 
+                <br><br>
+                Based in <span class="font-semibold text-zinc-800 dark:text-zinc-200">Chapainawabganj, Bangladesh</span>.
             </p>
-            <a href="mailto:hello@example.com" class="inline-flex items-center gap-2 px-10 py-4 rounded-xl border-2 border-zinc-900 dark:border-white text-zinc-900 dark:text-white font-mono font-semibold hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-all duration-300 transform hover:-translate-y-1">
+            <a href="mailto:hello@example.com" class="inline-flex items-center gap-3 px-12 py-5 rounded-xl border-2 border-zinc-900 dark:border-white text-zinc-900 dark:text-white font-mono font-bold hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_0_0_0_rgba(0,0,0,1)] hover:shadow-[8px_8px_0_0_rgba(0,0,0,0.1)] dark:hover:shadow-[8px_8px_0_0_rgba(255,255,255,0.2)]">
                 Say Hello
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
             </a>
+            
+            <div class="mt-20 text-sm text-zinc-500 dark:text-zinc-500 font-mono">
+                <p>Designed in Figma. Built with HTML, Tailwind CSS & tsParticles.</p>
+                <p class="mt-2">&copy; 2026 Osman Basar.</p>
+            </div>
         </section>
 
     </main>
@@ -298,68 +508,77 @@
     <!-- Scripts -->
     <script>
         // --- 1. Circular Theme Reveal Toggle ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
+        // Handles both desktop and mobile toggle buttons
+        const themeToggleBtns = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Check & Set Initial Theme
         const setInitialTheme = () => {
             if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                // In DARK mode, show the SUN icon (lightIcon) so they can click to go light
                 lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
                 document.documentElement.classList.add('dark');
             } else {
+                // In LIGHT mode, show the MOON icon (darkIcon) so they can click to go dark
                 darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
                 document.documentElement.classList.remove('dark');
             }
         };
         setInitialTheme();
 
-        themeToggleBtn.addEventListener('click', (event) => {
-            const isDark = document.documentElement.classList.contains('dark');
-            
-            // Calculate position for the circle animation
-            const rect = themeToggleBtn.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
-            const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-
-            const toggleLogic = () => {
-                darkIcon.classList.toggle('hidden');
-                lightIcon.classList.toggle('hidden');
-                if (isDark) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
-            };
-
-            // Check if View Transitions API is supported
-            if (!document.startViewTransition) {
-                toggleLogic();
-                return;
-            }
-
-            // Execute transition
-            const transition = document.startViewTransition(toggleLogic);
-            
-            transition.ready.then(() => {
-                const clipPath = [
-                    `circle(0px at ${x}px ${y}px)`,
-                    `circle(${endRadius}px at ${x}px ${y}px)`
-                ];
+        themeToggleBtns.forEach(btn => {
+            if(!btn) return;
+            btn.addEventListener('click', (event) => {
+                const isDark = document.documentElement.classList.contains('dark');
                 
-                document.documentElement.animate(
-                    {
-                        clipPath: clipPath,
-                    },
-                    {
-                        duration: 600,
-                        easing: 'ease-in-out',
-                        pseudoElement: '::view-transition-new(root)',
+                // Calculate position for the circle animation based on clicked button
+                const rect = btn.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                const endRadius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+                const toggleLogic = () => {
+                    if (isDark) {
+                        // Switching to LIGHT mode -> Show MOON icon
+                        document.documentElement.classList.remove('dark');
+                        localStorage.setItem('color-theme', 'light');
+                        darkIcon.classList.remove('hidden');
+                        lightIcon.classList.add('hidden');
+                    } else {
+                        // Switching to DARK mode -> Show SUN icon
+                        document.documentElement.classList.add('dark');
+                        localStorage.setItem('color-theme', 'dark');
+                        lightIcon.classList.remove('hidden');
+                        darkIcon.classList.add('hidden');
                     }
-                );
+                };
+
+                // Check if View Transitions API is supported
+                if (!document.startViewTransition) {
+                    toggleLogic();
+                    return;
+                }
+
+                // Execute transition
+                const transition = document.startViewTransition(toggleLogic);
+                
+                transition.ready.then(() => {
+                    const clipPath = [
+                        `circle(0px at ${x}px ${y}px)`,
+                        `circle(${endRadius}px at ${x}px ${y}px)`
+                    ];
+                    
+                    document.documentElement.animate(
+                        { clipPath: clipPath },
+                        {
+                            duration: 600,
+                            easing: 'ease-in-out',
+                            pseudoElement: '::view-transition-new(root)',
+                        }
+                    );
+                });
             });
         });
 
@@ -367,13 +586,13 @@
         tsParticles.load("tsparticles", {
             background: { color: { value: "transparent" } },
             particles: {
-                number: { value: 40, density: { enable: true, value_area: 800 } },
+                number: { value: 30, density: { enable: true, value_area: 800 } },
                 color: { value: ["#a1a1aa", "#d4d4d8", "#52525b"] }, // Zinc palette colors
                 shape: { type: "circle" },
                 opacity: {
                     value: 0.2,
                     random: true,
-                    anim: { enable: true, speed: 0.5, opacity_min: 0.05, sync: false }
+                    anim: { enable: true, speed: 0.3, opacity_min: 0.05, sync: false }
                 },
                 size: {
                     value: 2.5,
@@ -382,7 +601,7 @@
                 },
                 move: {
                     enable: true,
-                    speed: 0.4,
+                    speed: 0.3,
                     direction: "none",
                     random: true,
                     straight: false,
@@ -397,13 +616,13 @@
                     resize: true
                 },
                 modes: {
-                    bubble: { distance: 200, size: 4, duration: 2, opacity: 0.8, speed: 3 }
+                    bubble: { distance: 200, size: 4, duration: 2, opacity: 0.6, speed: 3 }
                 }
             },
             retina_detect: true
         });
 
-        // --- 4. Scroll Fade-in Animation ---
+        // --- 3. Scroll Fade-in Animation ---
         const fadeElements = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -411,7 +630,7 @@
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
         fadeElements.forEach(el => observer.observe(el));
     </script>
