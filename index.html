@@ -106,18 +106,18 @@
         .orb-1 {
             width: 50vw; height: 50vw;
             top: -20%; left: -10%;
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.08); /* Grayscale */
             mix-blend-mode: multiply;
         }
         .orb-2 {
             width: 40vw; height: 40vw;
             bottom: -10%; right: -10%;
-            background: rgba(0, 0, 0, 0.03);
+            background: rgba(0, 0, 0, 0.05);
             mix-blend-mode: multiply;
             animation-delay: -7s;
         }
-        .dark .orb-1 { background: rgba(255, 255, 255, 0.03); mix-blend-mode: screen; }
-        .dark .orb-2 { background: rgba(255, 255, 255, 0.02); mix-blend-mode: screen; }
+        .dark .orb-1 { background: rgba(255, 255, 255, 0.06); mix-blend-mode: screen; }
+        .dark .orb-2 { background: rgba(255, 255, 255, 0.03); mix-blend-mode: screen; }
 
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
@@ -132,15 +132,13 @@
             pointer-events: none;
         }
 
-        /* --- Fade-in Animation --- */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        /* --- Page Switch Animation --- */
+        .page-enter {
+            animation: fadeInPage 0.5s ease-out forwards;
         }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Custom Scrollbar */
@@ -152,7 +150,7 @@
         .dark ::-webkit-scrollbar-thumb:hover { background: #52525b; }
     </style>
 </head>
-<body class="bg-lightBg dark:bg-darkBg text-zinc-800 dark:text-zinc-200 overflow-x-hidden selection:bg-zinc-900 selection:text-white dark:selection:bg-zinc-100 dark:selection:text-zinc-900">
+<body class="bg-lightBg dark:bg-darkBg text-zinc-800 dark:text-zinc-200 overflow-x-hidden selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-900">
 
     <!-- Background Elements -->
     <div class="graph-bg"></div>
@@ -163,19 +161,19 @@
     <!-- Navbar -->
     <nav class="glass-nav fixed w-full z-50 top-0 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-display font-bold tracking-tight hover:opacity-80 transition-opacity">
+            <button data-target="home" class="nav-link text-2xl font-display font-bold tracking-tight hover:opacity-80 transition-opacity">
                 O<span class="text-zinc-400 dark:text-zinc-500">.</span>Basar
-            </a>
+            </button>
             
             <!-- Desktop Nav -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">About</a>
-                <a href="#process" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Process</a>
-                <a href="#case-studies" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Case Studies</a>
-                <a href="#archive" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Archive</a>
-                <a href="#contact" class="text-sm font-semibold text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Contact</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <button data-target="home" class="nav-link text-zinc-900 dark:text-white text-sm font-semibold transition-colors">Home</button>
+                <button data-target="about" class="nav-link text-sm font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">About Me</button>
+                <button data-target="process" class="nav-link text-sm font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Process</button>
+                <button data-target="case-studies" class="nav-link text-sm font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Case Studies</button>
+                <button data-target="archive" class="nav-link text-sm font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Archive</button>
                 
-                <div class="w-px h-5 bg-zinc-300 dark:bg-zinc-700"></div>
+                <div class="w-px h-5 bg-zinc-300 dark:bg-zinc-700 mx-2"></div>
 
                 <button id="theme-toggle" class="p-2 rounded-full bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors flex items-center justify-center group" aria-label="Toggle Dark Mode">
                     <!-- Sun Icon (White in Dark Mode) -->
@@ -187,6 +185,11 @@
                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                     </svg>
                 </button>
+
+                <!-- HIRE NOW Button -->
+                <button data-target="contact" data-btn="hire" class="nav-link px-5 py-2.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold hover:shadow-[0_0_15px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300">
+                    HIRE NOW
+                </button>
             </div>
 
             <!-- Mobile Menu Button (Visual Only for snippet) -->
@@ -194,126 +197,176 @@
                 <button id="theme-toggle-mobile" class="p-2 rounded-full bg-zinc-200 dark:bg-zinc-800 transition-colors">
                     <svg class="w-5 h-5 text-zinc-900 dark:text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                 </button>
-                <svg class="w-6 h-6 text-zinc-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button data-target="contact" data-btn="hire" class="nav-link px-4 py-2 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold text-xs">HIRE NOW</button>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- Main Dashboard Content Area -->
     <main class="max-w-7xl mx-auto px-6 pt-32 pb-20 relative z-10">
 
-        <!-- Hero Section -->
-        <section id="home" class="min-h-[85vh] flex flex-col justify-center items-start fade-in">
+        <!-- 1. Home / Dashboard View -->
+        <section id="home" class="page-section page-enter min-h-[85vh] flex flex-col justify-center items-start">
             <div class="inline-flex items-center space-x-2 bg-zinc-200/50 dark:bg-zinc-800/50 px-3 py-1.5 rounded-full mb-6 border border-zinc-300 dark:border-zinc-700">
                 <span class="relative flex h-2.5 w-2.5">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 dark:bg-zinc-500 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-zinc-500 dark:bg-zinc-400"></span>
                 </span>
                 <span class="text-xs font-mono text-zinc-700 dark:text-zinc-300 uppercase tracking-wider font-semibold">Available for new opportunities</span>
             </div>
 
-            <h1 class="text-5xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tighter mb-6 text-zinc-900 dark:text-white leading-[1.1]">
-                Engineering robust <br class="hidden md:block"/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 to-zinc-400 dark:from-zinc-400 dark:to-zinc-600">digital products.</span>
+            <h1 class="text-5xl sm:text-6xl md:text-8xl font-display font-extrabold tracking-tighter mb-6 leading-[1.1]">
+                <span class="text-zinc-900 dark:text-white">Osman Basar.</span><br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-zinc-700 to-zinc-400 dark:from-zinc-300 dark:to-zinc-600">Frontend Engineer.</span>
             </h1>
             
             <p class="max-w-2xl text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 font-medium">
-                I'm Osman Basar, a Frontend Engineer specializing in scalable web applications, enterprise dashboards, and pixel-perfect UI. With over <strong class="text-zinc-900 dark:text-white">15+ applications designed and developed</strong>, I bridge the gap between complex engineering and elegant user experiences.
+                Specializing in scalable web applications, enterprise dashboards, and pixel-perfect UI. With over <strong class="text-zinc-900 dark:text-white">15+ applications designed and developed</strong>, I bridge the gap between complex engineering and elegant user experiences.
             </p>
             
             <div class="flex flex-col sm:flex-row items-center gap-4">
-                <a href="#case-studies" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors duration-200 text-center">
+                <button data-target="case-studies" class="nav-link w-full sm:w-auto px-8 py-4 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-semibold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors duration-200 text-center">
                     Explore Case Studies
-                </a>
-                <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-zinc-300 dark:border-zinc-700 hover:border-zinc-900 dark:hover:border-white transition-colors duration-200 text-zinc-900 dark:text-white font-semibold text-center">
-                    Get in Touch
-                </a>
+                </button>
+                <button data-target="about" class="nav-link w-full sm:w-auto px-8 py-4 rounded-xl border-2 border-zinc-300 dark:border-zinc-700 hover:border-zinc-900 dark:hover:border-white transition-colors duration-200 text-zinc-900 dark:text-white font-semibold text-center">
+                    More About Me
+                </button>
             </div>
         </section>
 
-        <!-- About & Goals Section -->
-        <section id="about" class="py-24 fade-in scroll-mt-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                <div class="lg:col-span-5">
-                    <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">01. About Me</h3>
-                    <h2 class="text-4xl font-display font-bold mb-6 text-zinc-900 dark:text-white">Driven by logic. Designed for humans.</h2>
+        <!-- 2. About Me Section -->
+        <section id="about" class="page-section hidden min-h-[85vh] py-12">
+            <div class="mb-16">
+                <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">My Profile</h3>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-zinc-900 dark:text-white">Pathway & Achievements.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Pathway / Timeline -->
+                <div>
+                    <h4 class="text-2xl font-bold mb-8 text-zinc-900 dark:text-white border-b border-zinc-200 dark:border-zinc-800 pb-4">The Pathway</h4>
+                    <div class="space-y-8 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-zinc-300 dark:before:via-zinc-700 before:to-transparent">
+                        
+                        <!-- Timeline Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-lightBg dark:border-darkBg bg-zinc-900 dark:bg-white shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow"></div>
+                            <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] glass-card p-6 rounded-2xl">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="font-bold text-zinc-900 dark:text-white text-lg">Senior Frontend Engineer</div>
+                                    <div class="font-mono text-xs text-zinc-900 dark:text-white">Present</div>
+                                </div>
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Leading architecture and UI engineering for high-scale enterprise dashboards. Mentoring junior developers and optimizing React performance globally.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-lightBg dark:border-darkBg bg-zinc-400 dark:bg-zinc-600 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow"></div>
+                            <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] glass-card p-6 rounded-2xl">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="font-bold text-zinc-900 dark:text-white text-lg">Frontend Developer</div>
+                                    <div class="font-mono text-xs text-zinc-500">2024</div>
+                                </div>
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Built and maintained complex single-page applications. Mastered state management tools, API integrations, and scalable component architecture.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div class="flex items-center justify-center w-5 h-5 rounded-full border-4 border-lightBg dark:border-darkBg bg-zinc-400 dark:bg-zinc-600 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow"></div>
+                            <div class="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] glass-card p-6 rounded-2xl">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="font-bold text-zinc-900 dark:text-white text-lg">UI Designer & Dev</div>
+                                    <div class="font-mono text-xs text-zinc-500">2022</div>
+                                </div>
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">Transitioned from design to code. Handled Figma-to-HTML/CSS workflows, focusing strictly on pixel-perfect, responsive layouts and pure JavaScript logic.</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="lg:col-span-7 space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    <p>
-                        My journey in tech didn't start with just writing code; it started with solving problems. Today, my primary focus is building <strong class="text-zinc-900 dark:text-white">complex, data-heavy web applications</strong>—ranging from Enterprise SaaS dashboards to scalable EdTech platforms.
-                    </p>
-                    <p>
-                        I believe that great frontend development isn't just about making things look pretty. It's about architecture, state management, accessibility, and performance. I tailor my workflow to build products that are not only visually engaging but maintainable for engineering teams over years.
-                    </p>
-                    <div class="pt-6 grid grid-cols-2 md:grid-cols-3 gap-6 font-mono text-sm">
-                        <div>
-                            <p class="text-zinc-900 dark:text-white font-bold mb-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">Core Stack</p>
-                            <ul class="space-y-2">
-                                <li>JavaScript (ES6+)</li>
-                                <li>React / Next.js</li>
-                                <li>TypeScript</li>
-                            </ul>
+
+                <!-- Achievements -->
+                <div>
+                    <h4 class="text-2xl font-bold mb-8 text-zinc-900 dark:text-white border-b border-zinc-200 dark:border-zinc-800 pb-4">Key Achievements</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="glass-card p-6 rounded-2xl text-center">
+                            <div class="text-4xl font-display font-extrabold text-zinc-900 dark:text-white mb-2">15+</div>
+                            <div class="text-sm font-semibold text-zinc-900 dark:text-white">Applications Shipped</div>
+                            <div class="text-xs text-zinc-500 mt-2">Spanning FinTech, EdTech, and E-commerce.</div>
                         </div>
-                        <div>
-                            <p class="text-zinc-900 dark:text-white font-bold mb-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">Styling & UI</p>
-                            <ul class="space-y-2">
-                                <li>Tailwind CSS</li>
-                                <li>Framer Motion</li>
-                                <li>Figma & Prototyping</li>
-                            </ul>
+                        <div class="glass-card p-6 rounded-2xl text-center">
+                            <div class="text-4xl font-display font-extrabold text-zinc-900 dark:text-white mb-2">100%</div>
+                            <div class="text-sm font-semibold text-zinc-900 dark:text-white">Lighthouse Scores</div>
+                            <div class="text-xs text-zinc-500 mt-2">Consistent top performance, SEO, and A11y.</div>
                         </div>
-                        <div>
-                            <p class="text-zinc-900 dark:text-white font-bold mb-2 border-b border-zinc-200 dark:border-zinc-800 pb-2">Architecture</p>
-                            <ul class="space-y-2">
-                                <li>RESTful APIs / GraphQL</li>
-                                <li>State Management</li>
-                                <li>Web Accessibility (a11y)</li>
-                            </ul>
+                        <div class="glass-card p-6 rounded-2xl text-center">
+                            <div class="text-4xl font-display font-extrabold text-zinc-900 dark:text-white mb-2">~1.4s</div>
+                            <div class="text-sm font-semibold text-zinc-900 dark:text-white">Load Time Reduction</div>
+                            <div class="text-xs text-zinc-500 mt-2">Optimized rendering and payload size globally.</div>
+                        </div>
+                        <div class="glass-card p-6 rounded-2xl text-center">
+                            <div class="text-4xl font-display font-extrabold text-zinc-900 dark:text-white mb-2">10k+</div>
+                            <div class="text-sm font-semibold text-zinc-900 dark:text-white">Lines of Clean Code</div>
+                            <div class="text-xs text-zinc-500 mt-2">Maintainable, scalable, and fully documented.</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 glass-card p-8 rounded-2xl bg-zinc-100/50 dark:bg-zinc-900/50">
+                        <h5 class="font-bold text-zinc-900 dark:text-white mb-4">Core Tech Stack</h5>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 text-xs font-mono rounded-lg bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">JavaScript (ES6+)</span>
+                            <span class="px-3 py-1.5 text-xs font-mono rounded-lg bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">TypeScript</span>
+                            <span class="px-3 py-1.5 text-xs font-mono rounded-lg bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">React & Next.js</span>
+                            <span class="px-3 py-1.5 text-xs font-mono rounded-lg bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">Tailwind CSS</span>
+                            <span class="px-3 py-1.5 text-xs font-mono rounded-lg bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">Figma</span>
+                            <span class="px-3 py-1.5 text-xs font-mono rounded-lg bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700">GraphQL</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Process Section -->
-        <section id="process" class="py-24 fade-in scroll-mt-20">
-            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase text-center">02. Methodology</h3>
-            <h2 class="text-4xl font-display font-bold mb-16 text-center text-zinc-900 dark:text-white">How I build products.</h2>
+        <!-- 3. Process Section -->
+        <section id="process" class="page-section hidden min-h-[85vh] py-12">
+            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase text-center">Methodology</h3>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-16 text-center text-zinc-900 dark:text-white">How I build products.</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Step 1 -->
                 <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
-                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">01</div>
+                    <div class="text-6xl font-display font-extrabold text-zinc-400 dark:text-zinc-600 mb-6 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">01</div>
                     <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Research & Discovery</h4>
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Understanding the business logic, user pain points, and technical constraints before writing a single line of code.</p>
                 </div>
                 <!-- Step 2 -->
                 <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
-                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">02</div>
+                    <div class="text-6xl font-display font-extrabold text-zinc-400 dark:text-zinc-600 mb-6 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">02</div>
                     <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Wireframes & Prototyping</h4>
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Drafting low-fidelity sketches mapped to user flows, evolving into high-fidelity, interactive Figma prototypes.</p>
                 </div>
                 <!-- Step 3 -->
                 <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
-                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">03</div>
+                    <div class="text-6xl font-display font-extrabold text-zinc-400 dark:text-zinc-600 mb-6 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">03</div>
                     <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Development & Architecture</h4>
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Building modular, reusable component libraries. Implementing clean state management and integrating APIs.</p>
                 </div>
                 <!-- Step 4 -->
                 <div class="glass-card p-8 rounded-2xl relative overflow-hidden group">
-                    <div class="text-5xl font-display font-bold text-zinc-200 dark:text-zinc-800 mb-6 group-hover:text-zinc-300 dark:group-hover:text-zinc-700 transition-colors">04</div>
+                    <div class="text-6xl font-display font-extrabold text-zinc-400 dark:text-zinc-600 mb-6 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">04</div>
                     <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white">Testing & Optimization</h4>
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Rigorous lighthouse audits, cross-browser testing, and performance tuning to ensure lightning-fast load times.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Deep Dive Case Studies -->
-        <section id="case-studies" class="py-24 fade-in scroll-mt-20 border-t border-zinc-200 dark:border-zinc-800">
-            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">03. Featured Work</h3>
-            <h2 class="text-4xl md:text-5xl font-display font-bold mb-16 text-zinc-900 dark:text-white">Case Studies</h2>
+        <!-- 4. Deep Dive Case Studies -->
+        <section id="case-studies" class="page-section hidden min-h-[85vh] py-12">
+            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase text-center">Featured Work</h3>
+            <h2 class="text-4xl md:text-5xl font-display font-bold mb-16 text-center text-zinc-900 dark:text-white">Case Studies</h2>
 
-            <div class="space-y-32">
+            <div class="space-y-32 max-w-6xl mx-auto">
                 
                 <!-- Case Study 1 -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -348,16 +401,10 @@
                             <div class="p-4 bg-zinc-100 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800">
                                 <strong class="text-zinc-900 dark:text-white block mb-2">Quantifiable Impact:</strong>
                                 <ul class="list-disc pl-5 space-y-1 text-sm font-medium">
-                                    <li><span class="text-green-600 dark:text-green-400">Reduced data-load time by 1.4s</span> via efficient state management.</li>
-                                    <li><span class="text-green-600 dark:text-green-400">Increased daily active user (DAU) retention by 25%</span> due to improved UX.</li>
+                                    <li><span class="text-zinc-900 dark:text-zinc-300">Reduced data-load time by 1.4s</span> via efficient state management.</li>
+                                    <li><span class="text-zinc-900 dark:text-zinc-300">Increased daily active user (DAU) retention by 25%</span> due to improved UX.</li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="mt-8">
-                            <a href="#" class="inline-flex items-center gap-2 text-zinc-900 dark:text-white font-bold hover:underline underline-offset-4 decoration-2">
-                                View Full Process 
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -388,18 +435,10 @@
                             <div class="p-4 bg-zinc-100 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800">
                                 <strong class="text-zinc-900 dark:text-white block mb-2">Quantifiable Impact:</strong>
                                 <ul class="list-disc pl-5 space-y-1 text-sm font-medium">
-                                    <li><span class="text-green-600 dark:text-green-400">Achieved 100% Lighthouse Scores</span> in Performance, Accessibility, and SEO.</li>
-                                    <li><span class="text-green-600 dark:text-green-400">Adopted by 500+ parents</span> within the first month of launch.</li>
+                                    <li><span class="text-zinc-900 dark:text-zinc-300">Achieved 100% Lighthouse Scores</span> in Performance, Accessibility, and SEO.</li>
+                                    <li><span class="text-zinc-900 dark:text-zinc-300">Adopted by 500+ parents</span> within the first month of launch.</li>
                                 </ul>
                             </div>
-                        </div>
-                        <div class="mt-8 flex gap-6">
-                            <a href="#" class="inline-flex items-center gap-2 text-zinc-900 dark:text-white font-bold hover:underline underline-offset-4 decoration-2">
-                                Read Case Study
-                            </a>
-                            <a href="#" class="inline-flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-medium transition-colors">
-                                Live Site <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
                         </div>
                     </div>
                     <div class="lg:col-span-5 order-2 lg:order-2 glass-card p-8 md:p-12 rounded-3xl h-full flex flex-col justify-center bg-zinc-100/50 dark:bg-zinc-900/50">
@@ -413,25 +452,25 @@
             </div>
         </section>
 
-        <!-- Archive / Hidden Work Section -->
-        <section id="archive" class="py-24 fade-in scroll-mt-20">
+        <!-- 5. Archive / Hidden Work Section -->
+        <section id="archive" class="page-section hidden min-h-[85vh] py-12">
             <div class="text-center mb-16">
-                <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">04. The Archive</h3>
-                <h2 class="text-3xl md:text-4xl font-display font-bold text-zinc-900 dark:text-white mb-4">Other Noteworthy Projects</h2>
+                <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">The Archive</h3>
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-zinc-900 dark:text-white mb-4">Other Projects</h2>
                 <p class="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">A curated list of personal experiments, open-source contributions, and side projects that highlight my versatility across different tech stacks.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 
                 <!-- Archive Item 1 -->
-                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300 border-t-4 border-t-zinc-900 dark:border-t-white">
                     <div class="flex justify-between items-center mb-6">
-                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        <svg class="w-10 h-10 text-zinc-900 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                         <a href="#" class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                         </a>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">Web3 Crypto Tracker</h4>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors">Web3 Crypto Tracker</h4>
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
                         A decentralized app tracking live cryptocurrency prices using WebSocket APIs. Built to master state management in high-frequency update environments.
                     </p>
@@ -443,14 +482,14 @@
                 </div>
 
                 <!-- Archive Item 2 -->
-                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300 border-t-4 border-transparent hover:border-t-zinc-900 dark:hover:border-t-white">
                     <div class="flex justify-between items-center mb-6">
-                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                         <a href="#" class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                         </a>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">AI Prompt Architect</h4>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors">AI Prompt Architect</h4>
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
                         A full-stack application that helps writers generate, save, and refine prompts for LLMs using an intuitive drag-and-drop interface.
                     </p>
@@ -462,14 +501,14 @@
                 </div>
 
                 <!-- Archive Item 3 -->
-                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-8 rounded-2xl flex flex-col h-full group hover:-translate-y-2 transition-transform duration-300 border-t-4 border-transparent hover:border-t-zinc-900 dark:hover:border-t-white">
                     <div class="flex justify-between items-center mb-6">
-                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                        <svg class="w-10 h-10 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                         <a href="#" class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                         </a>
                     </div>
-                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">Minimalist CSS Framework</h4>
+                    <h4 class="text-xl font-bold mb-3 text-zinc-900 dark:text-white group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors">Minimalist CSS Framework</h4>
                     <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-6 flex-grow leading-relaxed">
                         A lightweight (under 5kb) CSS utility framework created from scratch to understand the underlying mechanics of systems like Tailwind.
                     </p>
@@ -483,21 +522,23 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-32 fade-in text-center max-w-2xl mx-auto border-t border-zinc-200 dark:border-zinc-800">
-            <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">05. What's Next?</h3>
-            <h2 class="text-5xl font-display font-extrabold mb-8 text-zinc-900 dark:text-white">Let's build together.</h2>
-            <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-12 leading-relaxed">
-                Currently open for new opportunities. Whether you have a complex enterprise project, need a scalable frontend architecture, or just want to discuss web engineering, my inbox is always open. 
-                <br><br>
-                Based in <span class="font-semibold text-zinc-800 dark:text-zinc-200">Chapainawabganj, Bangladesh</span>.
-            </p>
-            <a href="mailto:hello@example.com" class="inline-flex items-center gap-3 px-12 py-5 rounded-xl border-2 border-zinc-900 dark:border-white text-zinc-900 dark:text-white font-mono font-bold hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-all duration-300 transform hover:-translate-y-1 shadow-[0_0_0_0_rgba(0,0,0,1)] hover:shadow-[8px_8px_0_0_rgba(0,0,0,0.1)] dark:hover:shadow-[8px_8px_0_0_rgba(255,255,255,0.2)]">
-                Say Hello
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-            </a>
+        <!-- 6. Contact Section -->
+        <section id="contact" class="page-section hidden min-h-[85vh] py-20 flex flex-col justify-center items-center">
+            <div class="text-center max-w-2xl w-full">
+                <h3 class="text-sm font-mono text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest uppercase">What's Next?</h3>
+                <h2 class="text-5xl md:text-6xl font-display font-extrabold mb-8 text-zinc-900 dark:text-white">Let's build together.</h2>
+                <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-12 leading-relaxed">
+                    Currently open for new opportunities. Whether you have a complex enterprise project, need a scalable frontend architecture, or just want to discuss web engineering, my inbox is always open. 
+                    <br><br>
+                    Based in <span class="font-semibold text-zinc-800 dark:text-zinc-200">Chapainawabganj, Bangladesh</span>.
+                </p>
+                <a href="mailto:hello@example.com" class="inline-flex items-center gap-3 px-12 py-5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-mono font-bold hover:shadow-[0_0_15px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-300 transform hover:-translate-y-1">
+                    Say Hello
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </a>
+            </div>
             
-            <div class="mt-20 text-sm text-zinc-500 dark:text-zinc-500 font-mono">
+            <div class="mt-auto pt-20 text-center text-sm text-zinc-500 dark:text-zinc-500 font-mono">
                 <p>Designed in Figma. Built with HTML, Tailwind CSS & tsParticles.</p>
                 <p class="mt-2">&copy; 2026 Osman Basar.</p>
             </div>
@@ -507,20 +548,69 @@
 
     <!-- Scripts -->
     <script>
-        // --- 1. Circular Theme Reveal Toggle ---
-        // Handles both desktop and mobile toggle buttons
+        // --- Dashboard / SPA Navigation Logic ---
+        const navLinks = document.querySelectorAll('.nav-link[data-target]');
+        const sections = document.querySelectorAll('.page-section');
+
+        function switchPage(targetId) {
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Hide all sections and remove animation class
+            sections.forEach(section => {
+                section.classList.add('hidden');
+                section.classList.remove('page-enter');
+            });
+
+            // Show target section and trigger animation reflow
+            const targetSection = document.getElementById(targetId);
+            if(targetSection) {
+                targetSection.classList.remove('hidden');
+                void targetSection.offsetWidth; // Trigger reflow to restart CSS animation
+                targetSection.classList.add('page-enter');
+            }
+
+            // Update active link styling on navbar
+            navLinks.forEach(link => {
+                if(link.tagName === 'BUTTON' && !link.hasAttribute('data-btn')) { 
+                    // Reset regular text links
+                    link.classList.remove('text-zinc-900', 'dark:text-white');
+                    if(link.getAttribute('data-target') !== 'home') {
+                        link.classList.add('text-zinc-500', 'dark:text-zinc-500');
+                    }
+                }
+            });
+
+            // Highlight newly active link (if it's not the hire now button)
+            const activeLinks = document.querySelectorAll(`.nav-link[data-target="${targetId}"]`);
+            activeLinks.forEach(link => {
+                if(link.tagName === 'BUTTON' && !link.hasAttribute('data-btn')) {
+                    link.classList.remove('text-zinc-500', 'dark:text-zinc-500');
+                    link.classList.add('text-zinc-900', 'dark:text-white');
+                }
+            });
+        }
+
+        // Add click events to all nav buttons
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('data-target');
+                switchPage(target);
+            });
+        });
+
+        // --- Circular Theme Reveal Toggle ---
         const themeToggleBtns = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIcon = document.getElementById('theme-toggle-light-icon');
 
         const setInitialTheme = () => {
             if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                // In DARK mode, show the SUN icon (lightIcon) so they can click to go light
                 lightIcon.classList.remove('hidden');
                 darkIcon.classList.add('hidden');
                 document.documentElement.classList.add('dark');
             } else {
-                // In LIGHT mode, show the MOON icon (darkIcon) so they can click to go dark
                 darkIcon.classList.remove('hidden');
                 lightIcon.classList.add('hidden');
                 document.documentElement.classList.remove('dark');
@@ -532,8 +622,6 @@
             if(!btn) return;
             btn.addEventListener('click', (event) => {
                 const isDark = document.documentElement.classList.contains('dark');
-                
-                // Calculate position for the circle animation based on clicked button
                 const rect = btn.getBoundingClientRect();
                 const x = rect.left + rect.width / 2;
                 const y = rect.top + rect.height / 2;
@@ -541,13 +629,11 @@
 
                 const toggleLogic = () => {
                     if (isDark) {
-                        // Switching to LIGHT mode -> Show MOON icon
                         document.documentElement.classList.remove('dark');
                         localStorage.setItem('color-theme', 'light');
                         darkIcon.classList.remove('hidden');
                         lightIcon.classList.add('hidden');
                     } else {
-                        // Switching to DARK mode -> Show SUN icon
                         document.documentElement.classList.add('dark');
                         localStorage.setItem('color-theme', 'dark');
                         lightIcon.classList.remove('hidden');
@@ -555,21 +641,17 @@
                     }
                 };
 
-                // Check if View Transitions API is supported
                 if (!document.startViewTransition) {
                     toggleLogic();
                     return;
                 }
 
-                // Execute transition
                 const transition = document.startViewTransition(toggleLogic);
-                
                 transition.ready.then(() => {
                     const clipPath = [
                         `circle(0px at ${x}px ${y}px)`,
                         `circle(${endRadius}px at ${x}px ${y}px)`
                     ];
-                    
                     document.documentElement.animate(
                         { clipPath: clipPath },
                         {
@@ -582,17 +664,17 @@
             });
         });
 
-        // --- 2. tsParticles Configuration (Small, Grayscale flying particles) ---
+        // --- tsParticles Configuration ---
         tsParticles.load("tsparticles", {
             background: { color: { value: "transparent" } },
             particles: {
-                number: { value: 30, density: { enable: true, value_area: 800 } },
-                color: { value: ["#a1a1aa", "#d4d4d8", "#52525b"] }, // Zinc palette colors
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: ["#18181b", "#3f3f46", "#71717a", "#d4d4d8"] }, // Strict Grayscale Mix
                 shape: { type: "circle" },
                 opacity: {
-                    value: 0.2,
+                    value: 0.3,
                     random: true,
-                    anim: { enable: true, speed: 0.3, opacity_min: 0.05, sync: false }
+                    anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false }
                 },
                 size: {
                     value: 2.5,
@@ -601,7 +683,7 @@
                 },
                 move: {
                     enable: true,
-                    speed: 0.3,
+                    speed: 0.8,
                     direction: "none",
                     random: true,
                     straight: false,
@@ -616,23 +698,12 @@
                     resize: true
                 },
                 modes: {
-                    bubble: { distance: 200, size: 4, duration: 2, opacity: 0.6, speed: 3 }
+                    bubble: { distance: 200, size: 5, duration: 2, opacity: 0.8, speed: 3 }
                 }
             },
             retina_detect: true
         });
 
-        // --- 3. Scroll Fade-in Animation ---
-        const fadeElements = document.querySelectorAll('.fade-in');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        fadeElements.forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
